@@ -1,4 +1,4 @@
-/* Tailwind 4 se incorpora desde este import y expone sus utilidades al proyecto completo. */
+/* Esta línea carga Tailwind 4 y habilita sus utilidades en el proyecto. */
 @import "tailwindcss";
 
-/* Este archivo también será el punto de entrada para estilos globales compartidos. */
+/* Aquí viven los estilos globales que no pertenecen a un componente concreto. */

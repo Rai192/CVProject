@@ -1,11 +1,10 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
-// Astro centraliza su configuración aquí para que Vite, integraciones y futuras opciones
-// del proyecto queden declaradas en un solo punto.
+// Este archivo define la configuración general del proyecto Astro.
 export default defineConfig({
   vite: {
-    // Tailwind se conecta al pipeline de Vite para generar las utilidades usadas en las plantillas.
+    // Astro usa Vite por debajo; aquí se conecta Tailwind para procesar las clases del markup.
     plugins: [tailwindcss()],
   },
 });

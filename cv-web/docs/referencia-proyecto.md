@@ -16,7 +16,12 @@ No debemos leerlo directamente desde la web ni convertirlo en la fuente final de
 
 ## Criterio de comentarios
 
-Los comentarios del código siguen una regla simple: explicar intención, contexto o decisiones, no repetir literalmente lo que ya dice la sintaxis.
+Los comentarios del código deben ser didácticos y técnicos. Su objetivo es aclarar responsabilidades, integración o comportamiento de un bloque sin duplicar la sintaxis visible.
+
+También seguiremos dos reglas pedagógicas simples:
+
+- partir desde conceptos cercanos a HTML, CSS o TypeScript antes de introducir vocabulario propio de Astro
+- explicar una sola idea importante por comentario para reducir carga cognitiva
 
 ### Qué sí comentamos
 
@@ -30,6 +35,7 @@ Los comentarios del código siguen una regla simple: explicar intención, contex
 - cada línea evidente
 - cada clase de Tailwind por separado
 - archivos JSON como `package.json` o `tsconfig.json`, porque no admiten comentarios de forma segura
+- comentarios narrativos, opinativos o centrados en “presentación” en vez de responsabilidad técnica
 
 ## Archivos importantes del inicio
 
