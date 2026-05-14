@@ -1,35 +1,332 @@
 ---
-// En Astro, este bloque superior se usa para imports y lógica antes del HTML.
-// Piensa en él como la parte "TypeScript/JavaScript" del archivo `.astro`.
+// El frontmatter de Astro puede importar datos y tipos desde archivos TypeScript externos.
 import '../styles/global.css';
+// Los datos del perfil viven fuera de la pagina para mantener este archivo mas limpio.
+import { experiences, heroTags, highlights, navItems, stackGroups } from '../data/profile';
 ---
 
 <html lang="es">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Raimundo Plaza | CV Web</title>
+    <meta
+      name="description"
+      content="Raimundo Plaza, Full-Stack Developer con foco en Front-End y mobile hibrido con Angular e Ionic."
+    />
+    <title>Raimundo Plaza | Full-Stack Developer</title>
   </head>
 
-  <!-- `body` aplica estilos base a toda la página renderizada. -->
-  <body class="min-h-screen bg-neutral-950 text-neutral-100">
-    <!-- `main` contiene el contenido principal y limita el ancho para controlar el layout. -->
-    <main class="mx-auto max-w-5xl px-6 py-16">
-      <!-- `section` agrupa este bloque como una unidad semántica dentro de la página. -->
-      <section class="rounded-2xl border border-neutral-800 bg-neutral-900/60 p-8">
-        <p class="text-sm text-neutral-400">
-          Desarrollador / Analista Programador
-        </p>
+  <!-- body define el lienzo completo sobre el que se organizan la navegacion y las secciones. -->
+  <body class="min-h-screen bg-[var(--color-page)] text-[var(--color-ink)]">
+    <div class="pointer-events-none fixed inset-0 overflow-hidden">
+      <div class="absolute left-[-8rem] top-[-6rem] h-72 w-72 rounded-full bg-cyan-400/18 blur-3xl"></div>
+      <div class="absolute right-[-4rem] top-24 h-80 w-80 rounded-full bg-teal-300/12 blur-3xl"></div>
+      <div class="absolute bottom-0 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-sky-500/10 blur-3xl"></div>
+    </div>
 
-        <!-- `h1` marca el título principal del documento a nivel semántico. -->
-        <h1 class="mt-3 text-4xl font-bold tracking-tight">
-          Raimundo Plaza
-        </h1>
+    <!-- header mantiene visible la navegacion principal mientras el usuario recorre la landing. -->
+    <header class="sticky top-0 z-30 border-b border-white/10 bg-slate-950/75 backdrop-blur-xl">
+      <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-4 sm:px-6 lg:px-8">
+        <a href="#inicio" class="min-w-0">
+          <p class="text-xs uppercase tracking-[0.35em] text-cyan-300/80">Raimundo Plaza</p>
+          <p class="mt-1 text-sm text-slate-300">Full-Stack Developer</p>
+        </a>
 
-        <!-- Este párrafo agrega contexto al bloque principal sin cambiar su jerarquía semántica. -->
-        <p class="mt-4 max-w-2xl text-neutral-300">
-          Construyo interfaces claras, mantenibles y orientadas a resolver problemas reales.
-        </p>
+        <nav aria-label="Secciones principales" class="hidden md:block">
+          <ul class="flex items-center gap-2 text-sm text-slate-300">
+            {
+              navItems.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class="rounded-full px-4 py-2 transition hover:bg-white/8 hover:text-white"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+
+        <a
+          href="#contacto"
+          class="rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-sm font-medium text-cyan-100 transition hover:border-cyan-200/60 hover:bg-cyan-200/18"
+        >
+          Hablemos
+        </a>
+      </div>
+    </header>
+
+    <main class="relative mx-auto flex max-w-7xl flex-col gap-14 px-5 py-10 sm:px-6 lg:px-8 lg:py-14">
+      <!-- hero entrega la primera impresion y concentra nombre, foco tecnico y contacto. -->
+      <section
+        id="inicio"
+        class="grid gap-8 rounded-[2rem] border border-white/10 bg-slate-900/60 p-6 shadow-[0_24px_80px_rgba(8,15,28,0.45)] backdrop-blur md:p-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(18rem,0.7fr)] lg:p-10"
+      >
+        <div>
+          <p class="inline-flex rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-cyan-100">
+            Front-End + Mobile + Integracion
+          </p>
+
+          <h1 class="mt-6 max-w-4xl text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Raimundo Felipe Plaza Undurraga
+          </h1>
+
+          <p class="mt-4 max-w-3xl text-lg font-semibold text-slate-200 sm:text-xl">
+            Full-Stack Developer | Front-End & Mobile Developer con Angular e Ionic
+          </p>
+
+          <p class="mt-6 max-w-3xl text-base leading-8 text-slate-300 sm:text-lg">
+            Desarrollador Full-Stack con foco en Front-End y mobile hibrido, orientado a
+            construir productos claros, mantenibles y alineados a necesidades reales de negocio.
+          </p>
+
+          <p class="mt-5 max-w-3xl text-sm leading-7 text-slate-400 sm:text-base">
+            Experiencia desarrollando aplicaciones web y moviles con Angular, Ionic y
+            TypeScript, participando en productos financieros y plataformas del area salud.
+            Combino implementacion frontend, integracion con APIs REST y trabajo cercano con
+            requerimientos funcionales dentro de equipos agiles.
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a
+              href="mailto:raimundoplazau@gmail.com"
+              class="rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200"
+            >
+              raimundoplazau@gmail.com
+            </a>
+            <a
+              href="https://linkedin.com/in/raimundo-plaza-undurraga-37b302196"
+              target="_blank"
+              rel="noreferrer"
+              class="rounded-full border border-white/15 px-5 py-3 text-sm font-semibold text-slate-100 transition hover:border-cyan-200/40 hover:bg-white/8"
+            >
+              Ver LinkedIn
+            </a>
+          </div>
+
+          <ul class="mt-8 flex flex-wrap gap-3">
+            {
+              heroTags.map((tag) => (
+                <li class="rounded-full border border-white/12 bg-white/5 px-4 py-2 text-sm text-slate-200">
+                  {tag}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <aside class="grid gap-4">
+          <div class="rounded-[1.75rem] border border-cyan-300/15 bg-slate-950/70 p-5">
+            <p class="text-xs uppercase tracking-[0.28em] text-cyan-300/80">Foco actual</p>
+            <p class="mt-4 text-2xl font-bold text-white">Interfaces, integracion y continuidad tecnica</p>
+            <p class="mt-3 text-sm leading-7 text-slate-400">
+              Perfil orientado a entregar soluciones funcionales y comprensibles, con equilibrio
+              entre experiencia de usuario, integracion tecnica y mantenimiento.
+            </p>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+            <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
+              <p class="text-3xl font-black text-white">6+</p>
+              <p class="mt-2 text-sm text-slate-400">Años de experiencia en desarrollo de software</p>
+            </div>
+            <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
+              <p class="text-3xl font-black text-white">3</p>
+              <p class="mt-2 text-sm text-slate-400">Experiencias clave en finanzas, salud e integracion</p>
+            </div>
+            <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
+              <p class="text-3xl font-black text-white">4</p>
+              <p class="mt-2 text-sm text-slate-400">Tecnologias visibles que resumen el perfil principal</p>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="sobre-mi" class="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+        <div class="rounded-[1.75rem] border border-white/10 bg-slate-900/55 p-6">
+          <p class="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300/80">Sobre mi</p>
+          <h2 class="mt-4 text-3xl font-black tracking-tight text-white">Una base tecnica pensada para productos reales</h2>
+          <p class="mt-5 text-base leading-8 text-slate-300">
+            Perfil tecnico con experiencia en desarrollo Full-Stack, especialmente en interfaces
+            web y aplicaciones moviles hibridas. He trabajado en mantencion evolutiva,
+            implementacion de nuevas funcionalidades, integracion de servicios y apoyo en flujos
+            de build mobile.
+          </p>
+          <p class="mt-4 text-base leading-8 text-slate-400">
+            Mi experiencia cruza frontend moderno, consumo de APIs, soporte sobre backend Java y
+            herramientas de coordinacion y priorizacion. El foco general del trabajo esta en
+            entregar soluciones funcionales, comprensibles y sostenibles dentro de equipos de
+            desarrollo.
+          </p>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {
+            highlights.map((item) => (
+              <article class="rounded-[1.75rem] border border-white/10 bg-slate-900/50 p-6">
+                <p class="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-200/85">
+                  {item.title}
+                </p>
+                <p class="mt-4 text-sm leading-7 text-slate-400">{item.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <article class="rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-slate-900 to-slate-950 p-6">
+          <p class="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300/80">Frontend</p>
+          <p class="mt-3 text-lg font-bold text-white">Angular, TypeScript y UI mantenible</p>
+          <p class="mt-3 text-sm leading-7 text-slate-400">
+            Implementacion de interfaces y flujos claros orientados a producto y continuidad tecnica.
+          </p>
+        </article>
+        <article class="rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-slate-900 to-slate-950 p-6">
+          <p class="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300/80">Mobile</p>
+          <p class="mt-3 text-lg font-bold text-white">Ionic y builds para entornos reales</p>
+          <p class="mt-3 text-sm leading-7 text-slate-400">
+            Experiencia llevando soluciones web al entorno movil con procesos de build y ajuste.
+          </p>
+        </article>
+        <article class="rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-slate-900 to-slate-950 p-6">
+          <p class="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300/80">Integracion</p>
+          <p class="mt-3 text-lg font-bold text-white">REST APIs y colaboracion con backend</p>
+          <p class="mt-3 text-sm leading-7 text-slate-400">
+            Consumo de servicios y apoyo sobre Java para mantener continuidad entre capas.
+          </p>
+        </article>
+        <article class="rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-slate-900 to-slate-950 p-6">
+          <p class="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300/80">Trabajo agIl</p>
+          <p class="mt-3 text-lg font-bold text-white">Ejecucion, tickets y requerimientos</p>
+          <p class="mt-3 text-sm leading-7 text-slate-400">
+            Participacion en priorizacion, coordinacion y mejora continua dentro de equipos agiles.
+          </p>
+        </article>
+      </section>
+
+      <!-- experiencia resume la trayectoria y deja un CTA listo para una futura pagina propia. -->
+      <section id="experiencia" class="rounded-[2rem] border border-white/10 bg-slate-900/55 p-6 md:p-8">
+        <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div class="max-w-2xl">
+            <p class="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300/80">Experiencia</p>
+            <h2 class="mt-3 text-3xl font-black tracking-tight text-white">Trayectoria resumida con foco en impacto y contexto</h2>
+            <p class="mt-4 text-base leading-8 text-slate-400">
+              Una vista corta de los roles mas relevantes para reclutadores y lideres tecnicos. El
+              detalle completo puede crecer a una pagina dedicada sin cambiar la narrativa principal.
+            </p>
+          </div>
+
+          <a
+            href="#experiencia"
+            class="inline-flex rounded-full border border-white/12 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-cyan-300/40 hover:bg-white/7"
+          >
+            Ver mas experiencia
+          </a>
+        </div>
+
+        <div class="mt-8 grid gap-5">
+          {
+            experiences.map((item) => (
+              <article class="rounded-[1.75rem] border border-white/10 bg-slate-950/65 p-6">
+                <div class="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+                  <div>
+                    <h3 class="text-2xl font-bold text-white">{item.company}</h3>
+                    <p class="mt-2 text-base font-semibold text-cyan-100">{item.role}</p>
+                  </div>
+                  <div class="text-sm text-slate-400 lg:text-right">
+                    <p>{item.period}</p>
+                    <p class="mt-1">{item.location}</p>
+                  </div>
+                </div>
+
+                <ul class="mt-5 space-y-3 text-sm leading-7 text-slate-300">
+                  {
+                    item.summary.map((point) => (
+                      <li class="flex gap-3">
+                        <span class="mt-2 h-2 w-2 rounded-full bg-cyan-300"></span>
+                        <span>{point}</span>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section id="stack" class="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+        <div class="rounded-[1.75rem] border border-white/10 bg-slate-900/55 p-6">
+          <p class="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300/80">Stack</p>
+          <h2 class="mt-3 text-3xl font-black tracking-tight text-white">Tecnologias agrupadas por especialidad</h2>
+          <p class="mt-4 text-base leading-8 text-slate-400">
+            El objetivo de esta seccion es mostrar especializacion sin saturar la portada. Cuando
+            el sitio crezca, este bloque puede abrir paso a una pagina con mas profundidad tecnica.
+          </p>
+
+          <a
+            href="#stack"
+            class="mt-6 inline-flex rounded-full border border-white/12 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-cyan-300/40 hover:bg-white/7"
+          >
+            Ver stack completo
+          </a>
+        </div>
+
+        <div class="grid gap-4">
+          {
+            stackGroups.map((group) => (
+              <article class="rounded-[1.75rem] border border-white/10 bg-slate-950/60 p-6">
+                <h3 class="text-lg font-bold text-white">{group.title}</h3>
+                <ul class="mt-4 flex flex-wrap gap-3">
+                  {
+                    group.items.map((item) => (
+                      <li class="rounded-full border border-white/10 bg-white/6 px-4 py-2 text-sm text-slate-200">
+                        {item}
+                      </li>
+                    ))
+                  }
+                </ul>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section
+        id="contacto"
+        class="rounded-[2rem] border border-cyan-300/12 bg-gradient-to-br from-slate-900/90 via-slate-950 to-cyan-950/30 p-6 md:p-8"
+      >
+        <div class="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300/80">Contacto</p>
+            <h2 class="mt-3 text-3xl font-black tracking-tight text-white">Listo para conversar sobre producto, frontend y crecimiento tecnico</h2>
+            <p class="mt-4 max-w-2xl text-base leading-8 text-slate-300">
+              Si buscas un perfil que combine implementacion, claridad tecnica y foco practico de
+              negocio, este sitio puede crecer contigo hacia mas detalle. La base ya esta lista para
+              seguir expandiendose a paginas de experiencia y stack.
+            </p>
+          </div>
+
+          <div class="grid gap-3 rounded-[1.75rem] border border-white/10 bg-slate-950/65 p-5">
+            <a
+              href="mailto:raimundoplazau@gmail.com"
+              class="rounded-2xl border border-white/10 px-4 py-4 text-sm text-slate-200 transition hover:border-cyan-300/40 hover:bg-white/7"
+            >
+              raimundoplazau@gmail.com
+            </a>
+            <a
+              href="https://linkedin.com/in/raimundo-plaza-undurraga-37b302196"
+              target="_blank"
+              rel="noreferrer"
+              class="rounded-2xl border border-white/10 px-4 py-4 text-sm text-slate-200 transition hover:border-cyan-300/40 hover:bg-white/7"
+            >
+              linkedin.com/in/raimundo-plaza-undurraga-37b302196
+            </a>
+          </div>
+        </div>
       </section>
     </main>
   </body>
