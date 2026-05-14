@@ -17,6 +17,9 @@ pnpm-debug.log*
 .env
 .env.production
 
+# private source material for the CV content
+source-cv/
+
 # macOS-specific files
 .DS_Store
 

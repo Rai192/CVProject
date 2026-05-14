@@ -1,4 +1,6 @@
 ---
+// En Astro, este bloque superior se ejecuta antes del HTML y se usa para imports,
+// preparar datos y, más adelante, tipar props o cargar contenido estructurado.
 import '../styles/global.css';
 ---
 
@@ -9,17 +11,22 @@ import '../styles/global.css';
     <title>Raimundo Plaza | CV Web</title>
   </head>
 
+  <!-- El body define el lienzo general de la página: altura mínima completa y paleta base. -->
   <body class="min-h-screen bg-neutral-950 text-neutral-100">
+    <!-- main centra el contenido y limita el ancho para mejorar lectura en pantallas grandes. -->
     <main class="mx-auto max-w-5xl px-6 py-16">
+      <!-- Esta primera sección funciona como presentación principal del CV. -->
       <section class="rounded-2xl border border-neutral-800 bg-neutral-900/60 p-8">
         <p class="text-sm text-neutral-400">
           Desarrollador / Analista Programador
         </p>
 
+        <!-- h1 identifica el nombre como contenido principal y mejora jerarquía semántica. -->
         <h1 class="mt-3 text-4xl font-bold tracking-tight">
           Raimundo Plaza
         </h1>
 
+        <!-- Este texto resume la propuesta profesional y luego podrá moverse a datos tipados. -->
         <p class="mt-4 max-w-2xl text-neutral-300">
           Construyo interfaces claras, mantenibles y orientadas a resolver problemas reales.
         </p>
