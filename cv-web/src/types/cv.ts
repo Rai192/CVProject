@@ -24,3 +24,48 @@ export type StackGroup = {
   title: string;
   items: string[];
 };
+
+// El hero agrupa el contenido principal que se ve primero al entrar al sitio.
+export type HeroContent = {
+  eyebrow: string;
+  name: string;
+  role: string;
+  summary: string;
+  description: string;
+  email: string;
+  linkedinUrl: string;
+  linkedinLabel: string;
+  metaDescription: string;
+};
+
+// Una estadistica rapida resume un dato visible en tarjetas pequenas del hero.
+export type QuickStat = {
+  value: string;
+  label: string;
+};
+
+// Una tarjeta fija resume una capacidad del perfil fuera de la experiencia detallada.
+export type FeatureCard = {
+  eyebrow: string;
+  title: string;
+  description: string;
+};
+
+// Un intro de seccion concentra el titulo, el texto y opcionalmente un CTA.
+export type SectionIntro = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+};
+
+// El bloque de contacto deja centralizado lo que se muestra en la landing.
+export type ContactInfo = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  email: string;
+  linkedinUrl: string;
+  linkedinLabel: string;
+};
