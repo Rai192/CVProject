@@ -45,7 +45,7 @@ export const heroFocus: SectionIntro = {
 
 // Estas métricas rápidas refuerzan el perfil sin convertir el hero en un CV completo.
 export const quickStats: QuickStat[] = [
-  { value: '4+', label: 'Años de experiencia en desarrollo de software' },
+  { value: '6+', label: 'Años de experiencia en desarrollo de software' },
   { value: '3', label: 'Experiencias clave en finanzas, salud e integración' },
   { value: '4', label: 'Tecnologías visibles que resumen el perfil principal' },
 ];
