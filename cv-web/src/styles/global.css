@@ -1,0 +1,29 @@
+/* Esta línea carga Tailwind 4 y habilita sus utilidades en el proyecto. */
+@import "tailwindcss";
+
+/* Aquí viven los estilos globales que no pertenecen a un componente concreto. */
+
+:root {
+  /* Variables base para color y tipografia compartida en toda la pagina. */
+  --color-page: #06111f;
+  --color-ink: #e7eef7;
+  --font-sans: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+}
+
+html {
+  /* El scroll suave mejora el paso entre secciones enlazadas por anclas. */
+  scroll-behavior: smooth;
+}
+
+body {
+  /* El fondo combina un degradado base con brillo radial para dar ambiente tecnologico. */
+  font-family: var(--font-sans);
+  background-image:
+    radial-gradient(circle at top, rgba(34, 211, 238, 0.08), transparent 28%),
+    linear-gradient(180deg, rgba(6, 17, 31, 1) 0%, rgba(3, 9, 19, 1) 100%);
+}
+
+::selection {
+  background: rgba(103, 232, 249, 0.28);
+  color: white;
+}

@@ -1,0 +1,309 @@
+---
+// El frontmatter de Astro puede importar datos y tipos desde archivos TypeScript externos.
+import '../styles/global.css';
+// Los datos del perfil viven fuera de la pagina para mantener este archivo mas limpio.
+import {
+  aboutIntro,
+  aboutSecondaryText,
+  contactInfo,
+  experienceIntro,
+  experiences,
+  featureCards,
+  heroContent,
+  heroFocus,
+  heroTags,
+  highlights,
+  navItems,
+  quickStats,
+  stackGroups,
+  stackIntro,
+} from '../data/profile';
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={heroContent.metaDescription} />
+    <title>Raimundo Plaza | Full-Stack Developer</title>
+  </head>
+
+  <!-- body define el lienzo completo sobre el que se organizan la navegacion y las secciones. -->
+  <body class="min-h-screen bg-[var(--color-page)] text-[var(--color-ink)]">
+    <div class="pointer-events-none fixed inset-0 overflow-hidden">
+      <div class="absolute left-[-8rem] top-[-6rem] h-72 w-72 rounded-full bg-cyan-400/18 blur-3xl"></div>
+      <div class="absolute right-[-4rem] top-24 h-80 w-80 rounded-full bg-teal-300/12 blur-3xl"></div>
+      <div class="absolute bottom-0 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-sky-500/10 blur-3xl"></div>
+    </div>
+
+    <!-- header mantiene visible la navegacion principal mientras el usuario recorre la landing. -->
+    <header class="sticky top-0 z-30 border-b border-white/10 bg-slate-950/75 backdrop-blur-xl">
+      <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-4 sm:px-6 lg:px-8">
+        <a href="#inicio" class="min-w-0">
+          <p class="text-xs uppercase tracking-[0.35em] text-cyan-300/80">Raimundo Plaza</p>
+          <p class="mt-1 text-sm text-slate-300">Full-Stack Developer</p>
+        </a>
+
+        <nav aria-label="Secciones principales" class="hidden md:block">
+          <ul class="flex items-center gap-2 text-sm text-slate-300">
+            {
+              navItems.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class="rounded-full px-4 py-2 transition hover:bg-white/8 hover:text-white"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+
+        <a
+          href="#contacto"
+          class="rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-sm font-medium text-cyan-100 transition hover:border-cyan-200/60 hover:bg-cyan-200/18"
+        >
+          Hablemos
+        </a>
+      </div>
+    </header>
+
+    <main class="relative mx-auto flex max-w-7xl flex-col gap-14 px-5 py-10 sm:px-6 lg:px-8 lg:py-14">
+      <!-- hero entrega la primera impresión y concentra nombre, foco técnico y contacto. -->
+      <section
+        id="inicio"
+        class="grid gap-8 rounded-[2rem] border border-white/10 bg-slate-900/60 p-6 shadow-[0_24px_80px_rgba(8,15,28,0.45)] backdrop-blur md:p-8 lg:grid-cols-[minmax(0,1.3fr)_minmax(18rem,0.7fr)] lg:p-10"
+      >
+        <div>
+          <p class="inline-flex rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.28em] text-cyan-100">
+            {heroContent.eyebrow}
+          </p>
+
+          <h1 class="mt-6 max-w-4xl text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
+            {heroContent.name}
+          </h1>
+
+          <p class="mt-4 max-w-3xl text-lg font-semibold text-slate-200 sm:text-xl">
+            {heroContent.role}
+          </p>
+
+          <p class="mt-6 max-w-3xl text-base leading-8 text-slate-300 sm:text-lg">
+            {heroContent.summary}
+          </p>
+
+          <p class="mt-5 max-w-3xl text-sm leading-7 text-slate-400 sm:text-base">
+            {heroContent.description}
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a
+              href={`mailto:${heroContent.email}`}
+              class="rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200"
+            >
+              {heroContent.email}
+            </a>
+            <a
+              href={heroContent.linkedinUrl}
+              target="_blank"
+              rel="noreferrer"
+              class="rounded-full border border-white/15 px-5 py-3 text-sm font-semibold text-slate-100 transition hover:border-cyan-200/40 hover:bg-white/8"
+            >
+              {heroContent.linkedinLabel}
+            </a>
+          </div>
+
+          <ul class="mt-8 flex flex-wrap gap-3">
+            {
+              heroTags.map((tag) => (
+                <li class="rounded-full border border-white/12 bg-white/5 px-4 py-2 text-sm text-slate-200">
+                  {tag}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <aside class="grid gap-4">
+          <div class="rounded-[1.75rem] border border-cyan-300/15 bg-slate-950/70 p-5">
+            <p class="text-xs uppercase tracking-[0.28em] text-cyan-300/80">{heroFocus.eyebrow}</p>
+            <p class="mt-4 text-2xl font-bold text-white">{heroFocus.title}</p>
+            <p class="mt-3 text-sm leading-7 text-slate-400">
+              {heroFocus.description}
+            </p>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+            {
+              quickStats.map((item) => (
+                <div class="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
+                  <p class="text-3xl font-black text-white">{item.value}</p>
+                  <p class="mt-2 text-sm text-slate-400">{item.label}</p>
+                </div>
+              ))
+            }
+          </div>
+        </aside>
+      </section>
+
+      <section id="sobre-mi" class="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+        <div class="rounded-[1.75rem] border border-white/10 bg-slate-900/55 p-6">
+          <p class="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300/80">{aboutIntro.eyebrow}</p>
+          <h2 class="mt-4 text-3xl font-black tracking-tight text-white">{aboutIntro.title}</h2>
+          <p class="mt-5 text-base leading-8 text-slate-300">
+            {aboutIntro.description}
+          </p>
+          <p class="mt-4 text-base leading-8 text-slate-400">
+            {aboutSecondaryText}
+          </p>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {
+            highlights.map((item) => (
+              <article class="rounded-[1.75rem] border border-white/10 bg-slate-900/50 p-6">
+                <p class="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-200/85">
+                  {item.title}
+                </p>
+                <p class="mt-4 text-sm leading-7 text-slate-400">{item.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {
+          featureCards.map((item) => (
+            <article class="rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-slate-900 to-slate-950 p-6">
+              <p class="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300/80">
+                {item.eyebrow}
+              </p>
+              <p class="mt-3 text-lg font-bold text-white">{item.title}</p>
+              <p class="mt-3 text-sm leading-7 text-slate-400">{item.description}</p>
+            </article>
+          ))
+        }
+      </section>
+
+      <!-- experiencia resume la trayectoria y deja un CTA listo para una futura pagina propia. -->
+      <section id="experiencia" class="rounded-[2rem] border border-white/10 bg-slate-900/55 p-6 md:p-8">
+        <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div class="max-w-2xl">
+            <p class="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300/80">{experienceIntro.eyebrow}</p>
+            <h2 class="mt-3 text-3xl font-black tracking-tight text-white">{experienceIntro.title}</h2>
+            <p class="mt-4 text-base leading-8 text-slate-400">
+              {experienceIntro.description}
+            </p>
+          </div>
+
+          <a
+            href={experienceIntro.ctaHref}
+            class="inline-flex rounded-full border border-white/12 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-cyan-300/40 hover:bg-white/7"
+          >
+            {experienceIntro.ctaLabel}
+          </a>
+        </div>
+
+        <div class="mt-8 grid gap-5">
+          {
+            experiences.map((item) => (
+              <article class="rounded-[1.75rem] border border-white/10 bg-slate-950/65 p-6">
+                <div class="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+                  <div>
+                    <h3 class="text-2xl font-bold text-white">{item.company}</h3>
+                    <p class="mt-2 text-base font-semibold text-cyan-100">{item.role}</p>
+                  </div>
+                  <div class="text-sm text-slate-400 lg:text-right">
+                    <p>{item.period}</p>
+                    <p class="mt-1">{item.location}</p>
+                  </div>
+                </div>
+
+                <ul class="mt-5 space-y-3 text-sm leading-7 text-slate-300">
+                  {
+                    item.summary.map((point) => (
+                      <li class="flex gap-3">
+                        <span class="mt-2 h-2 w-2 rounded-full bg-cyan-300"></span>
+                        <span>{point}</span>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section id="stack" class="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+        <div class="rounded-[1.75rem] border border-white/10 bg-slate-900/55 p-6">
+          <p class="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300/80">{stackIntro.eyebrow}</p>
+          <h2 class="mt-3 text-3xl font-black tracking-tight text-white">{stackIntro.title}</h2>
+          <p class="mt-4 text-base leading-8 text-slate-400">
+            {stackIntro.description}
+          </p>
+
+          <a
+            href={stackIntro.ctaHref}
+            class="mt-6 inline-flex rounded-full border border-white/12 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-cyan-300/40 hover:bg-white/7"
+          >
+            {stackIntro.ctaLabel}
+          </a>
+        </div>
+
+        <div class="grid gap-4">
+          {
+            stackGroups.map((group) => (
+              <article class="rounded-[1.75rem] border border-white/10 bg-slate-950/60 p-6">
+                <h3 class="text-lg font-bold text-white">{group.title}</h3>
+                <ul class="mt-4 flex flex-wrap gap-3">
+                  {
+                    group.items.map((item) => (
+                      <li class="rounded-full border border-white/10 bg-white/6 px-4 py-2 text-sm text-slate-200">
+                        {item}
+                      </li>
+                    ))
+                  }
+                </ul>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section
+        id="contacto"
+        class="rounded-[2rem] border border-cyan-300/12 bg-gradient-to-br from-slate-900/90 via-slate-950 to-cyan-950/30 p-6 md:p-8"
+      >
+        <div class="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300/80">{contactInfo.eyebrow}</p>
+            <h2 class="mt-3 text-3xl font-black tracking-tight text-white">{contactInfo.title}</h2>
+            <p class="mt-4 max-w-2xl text-base leading-8 text-slate-300">
+              {contactInfo.description}
+            </p>
+          </div>
+
+          <div class="grid gap-3 rounded-[1.75rem] border border-white/10 bg-slate-950/65 p-5">
+            <a
+              href={`mailto:${contactInfo.email}`}
+              class="rounded-2xl border border-white/10 px-4 py-4 text-sm text-slate-200 transition hover:border-cyan-300/40 hover:bg-white/7"
+            >
+              {contactInfo.email}
+            </a>
+            <a
+              href={contactInfo.linkedinUrl}
+              target="_blank"
+              rel="noreferrer"
+              class="rounded-2xl border border-white/10 px-4 py-4 text-sm text-slate-200 transition hover:border-cyan-300/40 hover:bg-white/7"
+            >
+              {contactInfo.linkedinLabel}
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
